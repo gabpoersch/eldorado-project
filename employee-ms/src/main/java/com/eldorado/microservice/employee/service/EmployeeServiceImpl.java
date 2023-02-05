@@ -40,11 +40,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponseDTO saveEmployee(EmployeeRequestDTO employeeRequestDTO) {
-//        Employee employee = EmployeeMapper.saveDtoToEntity(employeeSaveDTO);
-//        Employee savedEmployee = employeeRepository.save(employee);
-//
-//
-//        return EmployeeMapper.entityToDto(savedEmployee);
         Employee employee = Employee.builder()
                 .username(employeeRequestDTO.getUsername())
                 .password(passwordEncoder.encode(employeeRequestDTO.getPassword()))
