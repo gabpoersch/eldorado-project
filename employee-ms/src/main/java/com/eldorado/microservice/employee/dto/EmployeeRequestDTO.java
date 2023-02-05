@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @ToString(exclude = "password")
-public class EmployeeSaveDTO {
+public class EmployeeRequestDTO {
     String username;
     String password;
     String name;

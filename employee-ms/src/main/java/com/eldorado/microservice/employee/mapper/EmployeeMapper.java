@@ -1,7 +1,7 @@
 package com.eldorado.microservice.employee.mapper;
 
 import com.eldorado.microservice.employee.dto.EmployeeDTO;
-import com.eldorado.microservice.employee.dto.EmployeeSaveDTO;
+import com.eldorado.microservice.employee.dto.EmployeeRequestDTO;
 import com.eldorado.microservice.employee.dto.EmployeeUpdateDTO;
 import com.eldorado.microservice.employee.model.Employee;
 import lombok.AccessLevel;
@@ -28,18 +28,18 @@ public class EmployeeMapper {
         return modelMapper.map(employeeDto, Employee.class);
     }
 
-    public static EmployeeSaveDTO entityToSaveDto(Employee employee) {
+    public static EmployeeRequestDTO entityToRequestDto(Employee employee) {
         if (employee == null) {
             return null;
         }
-        return modelMapper.map(employee, EmployeeSaveDTO.class);
+        return modelMapper.map(employee, EmployeeRequestDTO.class);
     }
 
-    public static Employee saveDtoToEntity(EmployeeSaveDTO employeeSaveDTO) {
-        if (employeeSaveDTO == null) {
+    public static Employee requestDtoToEntity(EmployeeRequestDTO employeeRequestDTO) {
+        if (employeeRequestDTO == null) {
             return null;
         }
-        return modelMapper.map(employeeSaveDTO, Employee.class);
+        return modelMapper.map(employeeRequestDTO, Employee.class);
     }
 
     public static EmployeeUpdateDTO entityToUpdateDto(Employee employee) {

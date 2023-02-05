@@ -1,7 +1,8 @@
 package com.eldorado.microservice.employee.controller;
 
 import com.eldorado.microservice.employee.dto.EmployeeDTO;
-import com.eldorado.microservice.employee.dto.EmployeeSaveDTO;
+import com.eldorado.microservice.employee.dto.EmployeeRequestDTO;
+import com.eldorado.microservice.employee.dto.EmployeeResponseDTO;
 import com.eldorado.microservice.employee.dto.EmployeeUpdateDTO;
 import com.eldorado.microservice.employee.exception.EmployeeException;
 import io.swagger.annotations.*;
@@ -18,7 +19,7 @@ public interface EmployeeController {
             @ApiResponse(code = 409, message = "Username already exists")
     })
     @PostMapping("/save")
-    ResponseEntity<EmployeeDTO> saveEmployee(@RequestBody EmployeeSaveDTO employeeSaveDTO);
+    ResponseEntity<EmployeeResponseDTO> saveEmployee(@RequestBody EmployeeRequestDTO employeeRequestDTO);
 
     @ApiOperation(value = "View a specific employee", response = EmployeeDTO.class)
     @ApiResponses(value = {

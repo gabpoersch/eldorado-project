@@ -2,7 +2,8 @@ package com.eldorado.microservice.employee.controller;
 
 
 import com.eldorado.microservice.employee.dto.EmployeeDTO;
-import com.eldorado.microservice.employee.dto.EmployeeSaveDTO;
+import com.eldorado.microservice.employee.dto.EmployeeRequestDTO;
+import com.eldorado.microservice.employee.dto.EmployeeResponseDTO;
 import com.eldorado.microservice.employee.dto.EmployeeUpdateDTO;
 import com.eldorado.microservice.employee.exception.EmployeeException;
 import com.eldorado.microservice.employee.service.EmployeeService;
@@ -18,8 +19,8 @@ public class EmployeeControllerImpl implements EmployeeController {
     private EmployeeService employeeService;
 
     @Override
-    public ResponseEntity<EmployeeDTO> saveEmployee(EmployeeSaveDTO employeeSaveDTO) {
-        return new ResponseEntity<>(employeeService.saveEmployee(employeeSaveDTO), HttpStatus.CREATED);
+    public ResponseEntity<EmployeeResponseDTO> saveEmployee(EmployeeRequestDTO employeeRequestDTO) {
+        return new ResponseEntity<>(employeeService.saveEmployee(employeeRequestDTO), HttpStatus.CREATED);
     }
 
     @Override

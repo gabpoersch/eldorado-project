@@ -1,7 +1,8 @@
 package com.eldorado.microservice.employee.service;
 
 import com.eldorado.microservice.employee.dto.EmployeeDTO;
-import com.eldorado.microservice.employee.dto.EmployeeSaveDTO;
+import com.eldorado.microservice.employee.dto.EmployeeRequestDTO;
+import com.eldorado.microservice.employee.dto.EmployeeResponseDTO;
 import com.eldorado.microservice.employee.dto.EmployeeUpdateDTO;
 import com.eldorado.microservice.employee.enums.GenderEnum;
 import com.eldorado.microservice.employee.exception.EmployeeException;
@@ -31,7 +32,7 @@ public class EmployeeServiceImplTest {
     private EmployeeServiceImpl employeeServiceImpl;
 
     private Employee employee;
-    private EmployeeSaveDTO employeeSaveDTO;
+    private EmployeeRequestDTO employeeRequestDTO;
     private EmployeeUpdateDTO employeeUpdateDTO;
     private final String username = "username";
 
@@ -44,12 +45,12 @@ public class EmployeeServiceImplTest {
         employee.setGender(GenderEnum.F);
         employee.setBirthdate("birthdate");
 
-        employeeSaveDTO = new EmployeeSaveDTO();
-        employeeSaveDTO.setUsername(username);
-        employeeSaveDTO.setName("name");
-        employeeSaveDTO.setDocument("document");
-        employeeSaveDTO.setGender(GenderEnum.F);
-        employeeSaveDTO.setBirthdate("birthdate");
+        employeeRequestDTO = new EmployeeRequestDTO();
+        employeeRequestDTO.setUsername(username);
+        employeeRequestDTO.setName("name");
+        employeeRequestDTO.setDocument("document");
+        employeeRequestDTO.setGender(GenderEnum.F);
+        employeeRequestDTO.setBirthdate("birthdate");
 
         employeeUpdateDTO = new EmployeeUpdateDTO();
         employeeUpdateDTO.setName("newName");
@@ -62,7 +63,7 @@ public class EmployeeServiceImplTest {
     public void saveEmployee_shouldSaveEmployee() {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
-        EmployeeDTO savedEmployee = employeeServiceImpl.saveEmployee(employeeSaveDTO);
+        EmployeeResponseDTO savedEmployee = employeeServiceImpl.saveEmployee(employeeRequestDTO);
 
         assertEquals(EmployeeMapper.entityToDto(employee), savedEmployee);
     }
@@ -121,9 +122,9 @@ public class EmployeeServiceImplTest {
     public void saveEmployee_shouldMapEmployeeSaveDtoToEntity() {
         when(employeeRepository.save(any(Employee.class))).thenReturn(employee);
 
-        EmployeeDTO savedEmployee = employeeServiceImpl.saveEmployee(employeeSaveDTO);
+        EmployeeResponseDTO savedEmployee = employeeServiceImpl.saveEmployee(employeeRequestDTO);
 
-        assertEquals(EmployeeMapper.saveDtoToEntity(employeeSaveDTO), employee);
+        assertEquals(EmployeeMapper.requestDtoToEntity(employeeRequestDTO), employee);
     }
 
 }
