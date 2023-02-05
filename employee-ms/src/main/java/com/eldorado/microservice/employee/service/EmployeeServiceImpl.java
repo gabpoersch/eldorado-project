@@ -8,6 +8,7 @@ import com.eldorado.microservice.employee.exception.EmployeeException;
 import com.eldorado.microservice.employee.mapper.EmployeeMapper;
 import com.eldorado.microservice.employee.model.Employee;
 import com.eldorado.microservice.employee.repository.EmployeeRepository;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = EmployeeMapper.saveDtoToEntity(employeeSaveDTO);
         Employee savedEmployee = employeeRepository.save(employee);
 
-        rabbitTemplate.convertAndSend(SAVE_QUEUE, employeeSaveDTO.toString());
+        Message message = new Message(employeeSaveDTO.toString().getBytes());
+        rabbitTemplate.send(SAVE_QUEUE, message);
 
         return EmployeeMapper.entityToDto(savedEmployee);
     }
@@ -57,7 +59,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.save(employee);
 
-        rabbitTemplate.convertAndSend(UPDATE_QUEUE, employee.toString());
+        Message message = new Message(employee.toString().getBytes());
+        rabbitTemplate.send(UPDATE_QUEUE, message);
 
         return EmployeeMapper.entityToDto(employee);
     }
@@ -69,6 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.delete(employee);
 
-        rabbitTemplate.convertAndSend(DELETE_QUEUE, employee.toString());
+        Message message = new Message(employee.toString().getBytes());
+        rabbitTemplate.send(DELETE_QUEUE, message);
     }
 }
