@@ -1,0 +1,20 @@
+server:
+  port:
+    8081
+
+mongodb:
+  database: employee
+  connection:
+      string: mongodb://mongo-db:27017
+
+spring:
+  data:
+    mongodb:
+      host: mongo-db
+      database: employee
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: admin
+    password: admin
+
